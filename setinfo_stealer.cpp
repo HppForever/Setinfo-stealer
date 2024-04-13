@@ -31,7 +31,7 @@ void Console::SetinfoStealer::Run()
 
     DWORD hw = (DWORD)GetModuleHandle(Crypt_hw_dll.c_str());
 
-    g_Console.PrintColor(cvar.visuals.color_gameconsole.main_text[0] * 255, cvar.visuals.color_gameconsole.main_text[1] * 255, cvar.visuals.color_gameconsole.main_text[2] * 255, Language::GetString(skCrypt("\nOutput almost all setinfo players that were currently on the server\n"), skCrypt(u8"\nВывод почти всех setinfo игроков которые в данный момент на сервере:\n"));
+    g_Console.PrintColor(cvar.visuals.color_gameconsole.main_text[0] * 255, cvar.visuals.color_gameconsole.main_text[1] * 255, cvar.visuals.color_gameconsole.main_text[2] * 255, Language::GetString(skCrypt("\nOutput almost all setinfo players that were currently on the server\n"), skCrypt(u8"\nГ‚Г»ГўГ®Г¤ ГЇГ®Г·ГІГЁ ГўГ±ГҐГµ setinfo ГЁГЈГ°Г®ГЄГ®Гў ГЄГ®ГІГ®Г°Г»ГҐ Гў Г¤Г Г­Г­Г»Г© Г¬Г®Г¬ГҐГ­ГІ Г­Г  Г±ГҐГ°ГўГҐГ°ГҐ:\n"));
 
     auto offset_key1 = 0x12043CC;
     auto offset_key2 = 0x12043CC + 0x250;
@@ -69,10 +69,7 @@ void Console::SetinfoStealer::Run()
     std::vector<std::string> key_strings;
 
     for (int i = 0; i < MAX_CLIENTS; i++)
-    {
-        const std::string key_string = std::string((const char*)(hw + offset_key1 + (0x250 * i)));
-        key_strings.push_back(key_string);
-    }
+        key_strings.push_back(std::string((const char*)(hw + offset_key1 + (0x250 * i))));
 
     for (const auto& key : key_strings)
         AddressConversion_AndPrint(key);
