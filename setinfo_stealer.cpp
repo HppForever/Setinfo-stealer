@@ -1,23 +1,23 @@
 #include "..\..\main\main.h"
 
-void Console::SetinfoStealer::AddressConversion_AndPrint(std::string& address)
+void Console::SetinfoStealer::AddressConversion_AndPrint(std::string& Address)
 {
-    if (address.empty())
+    if (Address.empty())
         return;
 
-    size_t pos = 0;
-    int backslash_count = 0;
+    size_t Pos = 0;
+    int BackslashCount = 0;
 
-    while ((pos = address.find("\\", pos)) != std::string::npos)
+    while ((Pos = Address.find("\\", Pos)) != std::string::npos)
     {
-        if (backslash_count % 2 == 0) address.replace(pos, 1, "\n");
-        else                          address.replace(pos, 1, " ");
+        if (BackslashCount % 2 == 0) Address.replace(Pos, 1, "\n");
+        else                         Address.replace(Pos, 1, " ");
 
-        pos += 2;
-        backslash_count++;
+        Pos += 2;
+        BackslashCount++;
     }
 
-    g_Console.PrintColor(cvar.visuals.color_gameconsole.ordinary_text[0] * 255, cvar.visuals.color_gameconsole.ordinary_text[1] * 255, cvar.visuals.color_gameconsole.ordinary_text[2] * 255, address.c_str());
+    g_Console.PrintColor(cvar.visuals.color_gameconsole.ordinary_text[0] * 255, cvar.visuals.color_gameconsole.ordinary_text[1] * 255, cvar.visuals.color_gameconsole.ordinary_text[2] * 255, Address.c_str());
     g_pConsole->DPrintf("\n");
 }
 
@@ -26,10 +26,7 @@ void Console::SetinfoStealer::Run()
     if (!cvar.console.other.key_write_console) 
         return;
 
-    std::string Crypt_hw_dll;
-    Crypt_hw_dll = skCrypt("hw.dll");
-
-    DWORD hw = (DWORD)GetModuleHandle(Crypt_hw_dll.c_str());
+    DWORD hw = (DWORD)GetModuleHandle(std::string(skCrypt("hw.dll")).c_str());
 
     g_Console.PrintColor(cvar.visuals.color_gameconsole.main_text[0] * 255, cvar.visuals.color_gameconsole.main_text[1] * 255, cvar.visuals.color_gameconsole.main_text[2] * 255, Language::GetString(skCrypt("\nOutput almost all setinfo players that were currently on the server\n"), skCrypt(u8"\nÂûâîä ïî÷òè âñåõ setinfo èãðîêîâ êîòîðûå â äàííûé ìîìåíò íà ñåðâåðå:\n"));
 
