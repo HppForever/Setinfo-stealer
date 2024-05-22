@@ -10,8 +10,11 @@ void Console::SetinfoStealer::AddressConversion_AndPrint(std::string& Address)
 
     while ((Pos = Address.find("\\", Pos)) != std::string::npos)
     {
-        if (BackslashCount % 2 == NULL) Address.replace(Pos, 1, "\n");
-        else                            Address.replace(Pos, 1, " ");
+        if (BackslashCount % 2 == NULL) 
+            Address.replace(Pos, 1, "\n");
+            
+        else                            
+            Address.replace(Pos, 1, " ");
 
         Pos += 2;
         BackslashCount++;
